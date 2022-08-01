@@ -40,9 +40,8 @@ let {error,value} = await login_joi.login_joi.validate(req.body)
    }
    else{
      let Email_id= await registration_schema.find({"Email_id":req.body.Email_id})
-     
      if(Email_id == null){
-       return req.status(401).send("cannot find Email")
+       return req.send("cannot find Email")
      }
      else{
     try{
@@ -55,7 +54,6 @@ let {error,value} = await login_joi.login_joi.validate(req.body)
                  
                  let seconds = date.getSeconds();
                  let session_token_creation=req.body.Email_id.concat(seconds)
-                 
                 const seesion= await registration_schema.updateOne({"Email_id":req.body.Email_id},{$set:{"session_token":session_token_creation}})
                 res.json({"message":"login successful"})
             }

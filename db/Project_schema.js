@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 let Project_master = new mongoose.Schema({
+    "Email_id":{
+       type:String,
+       
+    },
     "Project_id":{
         type:Number,
         unique:true,
@@ -7,7 +11,7 @@ let Project_master = new mongoose.Schema({
     "Project_name":{
         type:String,
     },
-    "Project description":{
+    "Project_description":{
         type:String,
     },
     "Access":{
