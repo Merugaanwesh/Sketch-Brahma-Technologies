@@ -17,10 +17,10 @@ let Project_master = new mongoose.Schema({
     "Access":{
         type:String,
     },
-    "Createat":{
+    "Createdat":{
         type:Date,
     },
-    "Updateat":{
+    "Updatedat":{
         type:Date,
     }
 

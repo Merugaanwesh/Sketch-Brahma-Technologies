@@ -24,8 +24,8 @@ create_project_router.post("/createproject", async (req,res)=>{
                    "Project_name":req.body.Project_name,
                    "Project_description":req.body.Project_description,
                    "Access":"Private",
-                   "Createat":gettime,
-                   "Updateat":gettime
+                   "Createdat":gettime,
+                   "Updatedat":gettime
                 }
             let data = new Project_master(data_insert)
              data.save().then(response=>{
