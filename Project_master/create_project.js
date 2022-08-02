@@ -43,6 +43,7 @@ create_project_router.post("/createproject", async (req,res)=>{
 })
 
 create_project_router.post("/projectlisting", async (req,res)=>{
+    //console.log(req.body);
 
     let {error,value} = await project_session_joi.project_session_joi.validate(req.body)
     if(error){
@@ -54,8 +55,10 @@ create_project_router.post("/projectlisting", async (req,res)=>{
           let projectlist = await Project_master.find(
                               {"Email_id":req.body.Email_id},
                               {"Project_id": 1, "Email_id": 1, "Project_name": 1, _id:0})
+
+                    
                               res.json(projectlist)
-                            }
+         }
       else{
         res.json({"message":"plz login"})
       }
