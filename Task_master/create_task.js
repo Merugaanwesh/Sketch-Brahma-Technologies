@@ -18,10 +18,11 @@ task_master_router.post("/createtask", async (req ,res)=>{
         if(login_checking !=0){
             let randomvalue = Math.random()*10
             let getseconds = date.getSeconds()*randomvalue
+            let task_id = getseconds.toString().split("").reverse().slice(1,6).join("")
             let gettime = date.getTime()
             let dateinsert = {
                 "Project_id":req.body.Project_id,
-                "Task_id":getseconds,
+                "Task_id":task_id,
                 "Task_name":req.body.Task_name,
                 "Task_description":req.body.Task_description,
                 "Status":"Processing",
@@ -30,9 +31,10 @@ task_master_router.post("/createtask", async (req ,res)=>{
             }
             let data = new Task_master(dateinsert)
             data.save().then(response=>{
-                      res.json(response)
+                     res.json(response)
             }).catch(error=>{
-                res.json({"message":error.message})
+               res.json({"message":error.message})
+              // console.log(error);
             })
 
         }

@@ -15,12 +15,13 @@ create_project_router.post("/createproject", async (req,res)=>{
     else{
         let login_checking = await  registration_schema.find({"session_token":req.body.session_token , "Email_id": req.body.Email_id})
         if(login_checking != 0){
-            let randomvalue = Math.random()* 100
+           let randomvalue = Math.random()*10
             let getseconds = date.getSeconds()*randomvalue
+            let project_id = getseconds.toString().split("").reverse().slice(1,6).join("")
             let gettime = date.getTime()
             let data_insert ={
                   "Email_id":req.body.Email_id,
-                  "Project_id":getseconds,
+                  "Project_id":project_id,
                    "Project_name":req.body.Project_name,
                    "Project_description":req.body.Project_description,
                    "Access":"Private",

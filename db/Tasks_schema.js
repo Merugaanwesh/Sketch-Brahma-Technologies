@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 let Task_master = new mongoose.Schema({
    "Project_id":{
         type:Number,
+        unique:false,
     },
   "Task_id":{
     type:Number,
