@@ -22,6 +22,9 @@ let Project_master = new mongoose.Schema({
     },
     "Updatedat":{
         type:Date,
+    },
+    "Status":{
+        type:String
     }
 
 })
