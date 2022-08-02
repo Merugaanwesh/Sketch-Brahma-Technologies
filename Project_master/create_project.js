@@ -25,6 +25,7 @@ create_project_router.post("/createproject", async (req,res)=>{
                    "Project_name":req.body.Project_name,
                    "Project_description":req.body.Project_description,
                    "Access":"Private",
+                   "Status":"Open",
                    "Createdat":gettime,
                    "Updatedat":gettime
                 }

@@ -5,7 +5,9 @@ const project_session_joi= require("../joi_validation/project_session_joi")
 const Task_master = require("../db/Tasks_schema")
 const Project_master = require("../db/Project_schema");
 const project_update_joi = require("../joi_validation/project_update_joi");
-const { json } = require("body-parser");
+//const { json } = require("body-parser");
+const project_status_joi = require("../joi_validation/project_status_joi")
+
 let date = new Date()
 
 project_details_router.get("/project/details",async (req,res)=>{
@@ -95,6 +97,7 @@ project_details_router.delete("/delete", async(req,res)=>{
             let project_checkin = await Project_master.find({"Project_id":req.body.Project_id,"Email_id":req.body.Email_id})
             if(project_checkin.length != 0){
             await Project_master.deleteOne({"Project_id":req.body.Project_id})
+            await Task_master.deleteMany({"Project_id":req.body.Project_id})
             
             res.json({"message":"project delete"})
 
@@ -112,6 +115,31 @@ project_details_router.delete("/delete", async(req,res)=>{
 
 })
 
+project_details_router.post("/statuschange",async(req,res)=>{
+    let {error,value}= await project_status_joi.project_status_joi.validate(req.body)
+    if(error){
+         res.json({"message":error.message})
+    }
+    else{
+        let login_checking = await  registration_schema.find({"session_token":req.body.session_token , "Email_id": req.body.Email_id})
+        if(login_checking !=0){
+        let project_checkin = await Project_master.find({"Project_id":req.body.Project_id,"Email_id":req.body.Email_id})
+        if(project_checkin !=0){
+       let Project_name_update = await Project_master.updateOne({"Project_id":req.body.Project_id},{$set:{"Status":req.body.Status}})
+        res.json({"message":"status updated"})
+    }
+
+        }
+        else{
+            res.json({"message":"plz login"})
+        }
+    
+    
+    
+    
+    }
+
+})
 
 
 
