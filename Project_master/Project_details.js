@@ -64,7 +64,7 @@ project_details_router.put("/project_update", async(req,res)=>{
      if(login_checking !=0){
        
         
-        let project_checkin = await registration_schema.find({"Project_id":req.body.Project_id,"Email_id":req.body.Email_id})
+        let project_checkin = await Project_master.find({"Project_id":req.body.Project_id,"Email_id":req.body.Email_id})
         if(project_checkin.length != 0){
          let UpdateTime = date.getTime();
          let Project_name_update = await Project_master.updateOne({"Project_id":req.body.Project_id},{$set:{"Project_name":req.body.Project_name, 
