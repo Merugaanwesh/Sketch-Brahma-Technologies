@@ -19,13 +19,10 @@ task_master_router.post("/createtask", async (req ,res)=>{
     else{
     let login_checking = await  registration_schema.find({"session_token":req.body.session_token , "Email_id": req.body.Email_id})
         if(login_checking !=0){
-            let randomvalue = Math.random()*10
-            let getseconds = date.getSeconds()*randomvalue
-            let task_id = getseconds.toString().split("").reverse().slice(1,6).join("")
             let gettime = date.getTime()
             let dateinsert = {
                 "Project_id":req.body.Project_id,
-                "Task_id":task_id,
+                "Task_id":Date.now(),
                 "Task_name":req.body.Task_name,
                 "Task_description":req.body.Task_description,
                 "Status":"open",

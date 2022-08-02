@@ -3,7 +3,7 @@ let project_status_joi = new joi.object({
     "Email_id":joi.string().required(),
     "Project_id":joi.number().required(),
     "session_token":joi.string().required(),
-    "Status":joi.string().required()
+    "Status":joi.string().regex(/^(Completed|inprograss)$/).required()
 
 })
 

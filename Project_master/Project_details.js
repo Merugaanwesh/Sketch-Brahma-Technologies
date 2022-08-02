@@ -18,13 +18,17 @@ project_details_router.get("/project/details",async (req,res)=>{
     else{
     let login_checking = await  registration_schema.find({"session_token":req.body.session_token , "Email_id": req.body.Email_id})
     if(login_checking != 0){
-        let collections = await Project_master.aggregate([{
+        let collections = await Project_master.aggregate([
+            {
+                  $match: {Project_id : req.body.Project_id}
+   },  {
                 $lookup: {
                     from: "task_masters",
                     localField: "Project_id",
                     foreignField: "Project_id",
                     as: "Task_detalis"
                 }
+                
             }])
              let Filter =[]
              collections.forEach(item =>{
@@ -125,7 +129,7 @@ project_details_router.post("/statuschange",async(req,res)=>{
         if(login_checking !=0){
         let project_checkin = await Project_master.find({"Project_id":req.body.Project_id,"Email_id":req.body.Email_id})
         if(project_checkin !=0){
-       let Project_name_update = await Project_master.updateOne({"Project_id":req.body.Project_id},{$set:{"Status":req.body.Status}})
+        await Project_master.updateOne({"Project_id":req.body.Project_id},{$set:{"Status":req.body.Status}})
         res.json({"message":"status updated"})
     }
 

@@ -1,0 +1,13 @@
+http://localhost:3000/sketch/registration
+http://localhost:3000/sketch/user/login
+http://localhost:3000/sketch/user/logout
+http://localhost:3000/project/createproject
+http://localhost:3000/project/projectlisting
+http://localhost:3000/task/createtask
+http://localhost:3000/project_details/project/details
+http://localhost:3000/project_details/project_update
+http://localhost:3000/project_details/delete
+http://localhost:3000/project_details/statuschange
+http://localhost:3000/task/update_task
+http://localhost:3000/task/task_delete
+http://localhost:3000/task/task_statuschange

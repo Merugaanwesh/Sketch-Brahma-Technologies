@@ -4,7 +4,7 @@ let task_status_joi = new joi.object({
     "Project_id":joi.number().required(),
     "session_token":joi.string().required(),
     "Task_id":joi.number().required(),
-    "Status":joi.string().required()
+    "Status":joi.string().regex(/^(Completed|inprograss)$/).required()
 
 })
 
